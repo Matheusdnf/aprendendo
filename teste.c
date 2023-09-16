@@ -31,7 +31,7 @@ void esc_semana(void){   //escolha do dia da semana
     printf("     2-Segunda\n");
     printf("     3-Terça\n");
     printf("     4-Quarta\n");
-    printf("     5-Quinta\n");
+    printf("     5-Quintsa\n");
     printf("     6-Sexta\n");
     printf("     7-Sábado\n");
 }
