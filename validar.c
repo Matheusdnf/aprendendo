@@ -51,7 +51,7 @@ int main(void) {
         scanf("%s", cpf);
         teste = validarCPF(cpf);
         if (teste == 1) {
-            printf("CPF válido.\n");
+            printf("CPF váliado.\n");
             v=f;
         } else {
             printf("CPF inválido.\n");
