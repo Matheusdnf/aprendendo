@@ -3,6 +3,7 @@
 #include <string.h>
 
 void removerCaracteresNaoNumericos(char cpf[]) {
+    //feita pelo chat gpt
     int len = strlen(cpf);
     int k = 0;
     for (int i = 0; i < len; i++) {
@@ -15,6 +16,7 @@ void removerCaracteresNaoNumericos(char cpf[]) {
 }
 
 int validarCPF(char cpf[]) {
+    //validação de cpf retirado do site http://wurthmann.blogspot.com/ e sofreu algumas adpatações por Matheus Diniz
     // Remova os caracteres de pontuação (.) e hífen (-) do CPF
     removerCaracteresNaoNumericos(cpf);
 
@@ -58,18 +60,15 @@ int validarCPF(char cpf[]) {
 }
 
 int main(void) {
-    char cpf[15]; // Matriz de caracteres para armazenar o CPF com espaço para pontos e hífen.
+    char cpf[15];
     int teste;
     bool v = true;
     bool f = false;
-
     while (v) {
-        printf("Digite o CPF com ou sem '.' e '-': ");
+        printf("Digite o CPF: ");
         scanf("%s", cpf);
-
         teste = validarCPF(cpf);
         printf("Como está o CPF: %s\n", cpf);
-
         if (teste == 1) {
             printf("CPF válido.\n");
             v = f;
