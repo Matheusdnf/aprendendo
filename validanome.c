@@ -34,19 +34,47 @@ void ler_nome(char* nome){
     } 
 }  
  
-// adicionar a parte que após um espaço precisa existir uma letra 
-int valida_nome(char* nome) {   //feito com a ajuda do chat gpt
-    int tam=strlen(nome); 
-    for (int i=0; i<tam-1; i++){ //tam-1 é removendo o caracter nulo /0 
-        if (tam==1){       //verificar se o usuário não digitou um espaço em branco 
-            return 0; 
-        }  
-    } if (!isalpha(nome[0])) { //verifica se o primeiro caracter é um número, o ! inverto o valor lógico,como isalpha verifica se há letra 
-        return 0;      //todas as letras que le o for encontrada dirá que é falsa e caso encontre um número se tornara verdadeiro logo será removida
-    }for (int i = 1; i < tam - 1; i++) {
-        if (nome[i] == ' ' && !isalpha(nome[i + 1])) {  // verifica se o caracter adiante não é uma letra,caso for ok caso não acaba
-            return 0;                            //também vale caso for número 
+
+// Função personalizada para verificar se um caractere é uma letra (incluindo acentos)
+// Desenvolvida com akuda do chat gpt
+bool eh_letra_acentuada(char c) {   //recebe uma letra por vez
+    //um char com as palavras que possam vir a ser acentuadas
+    char letras_acentuadas[] = "ÁÀÂÃÉÈÊÍÌÎÓÒÔÕÚÙÛÇáàâãéèêíìîóòôõúùûç"; 
+    //ela roda um loop que termina até o caracter nulo do fgets
+    for (int i = 0; letras_acentuadas[i] != '\0'; i++) {  
+        // aí se a letra em questão for igual ao char letras_acentuadas retornará vdd
+        //esse loop e esse if verificiarão toda as letras
+        if (c == letras_acentuadas[i]) {
+            return true;
+        }
+    }
+    //verifica se a letra c é uma letra ou um espaço em branco 
+    return isalpha(c) || c == ' ';
+}
+
+int valida_nome(char *nome) {
+    // Pega o tamanho da variável nome
+    int tam = strlen(nome);
+    //só permite nome maiores que 2 letras 
+    // é utilizado 3 para contar com o \n do teclado
+    if (tam<3){
+        return 0;
+    }
+    // Verificar se o usuário não digitou um espaço em branco,tanto no ínicio como no final
+    if ((isspace(nome[0])) || (isspace(nome[tam - 2]))) {
+        return 0;
+    }
+    //esse loop serve para procurar a questão de números
+    for (int j = 0; j < tam - 1; j++) {
+        if (!eh_letra_acentuada(nome[j])) {
+            return 0;
+        }
+    }
+    // Verifica se dois espaços em branco consecutivos
+    for (int i = 0; i < tam - 2; i++) {
+        if ((isspace(nome[i])) && (isspace(nome[i + 1]))) {
+            return 0;
         }
     }
     return 1;
-} 
+}
