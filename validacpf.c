@@ -79,3 +79,21 @@ int main(void) {
 
     return 0;
 }
+
+void ler_cpf(char cpf[]) {
+    //função reutilizável para realizar a leitura do cpf
+    int c;
+    bool v=true,f=false;
+    while (v) {
+        printf("Digite o seu CPF: ");
+        scanf("%s", cpf);
+        limpar_buffer();
+        c = validarCPF(cpf);
+        if (c == 1) {
+            printf("válido\n");
+            v=f;
+        } else if (c == 0) {
+            printf("inválido\n");
+        }
+    }
+}
